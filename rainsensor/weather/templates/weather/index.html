@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Погодное приложение</title>
+</head>
+<body>
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+    <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+    <span class="fs-4">Погодное приложение 🌦️</span>
+  </a>
+
+  <ul class="nav nav-pills">
+    <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Главная</a></li>
+    <li class="nav-item"><a href="#" class="nav-link">Информация</a></li>
+  </ul>
+</header>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-5 offset-1">
+                <h1>Погода в вашем городе</h1>
+                <form method="post">
+                    {% csrf_token %}
+                    <label for="city">Город</label>
+                    <input type="text" id="city" class="form-control" name="city" placeholder="Введите город">
+                    <input type="submit" name="send" value="Узнать" class="mt-2 btn btn-danger">
+                </form>
+            </div>
+            <div class="col-4 offset-1">
+                    <h1>Информация</h1>
+                        <div class="alert alert-danger">
+                            {% if country_code and coordinate and temp and pressure and humidity %}
+                            <h4><span class="badge badge-primary">Country Code :</span> {{country_code}}</h4>
+                            <h4><span class="badge badge-primary">Сity: {{city}}</span></h4>
+                            <h4><span class="badge badge-primary">Coordinates [X,Y] :</span> {{coordinate}}</h4>
+                            <h4><span class="badge badge-primary">Temperature in Celsius :</span> {{temp}}</h4>
+                            <h4><span class="badge badge-primary">Pressure :</span> {{pressure}} </h4>
+                            <h4><span class="badge badge-primary">Humidity : </span> {{humidity}}</h4>
+                            <h4><span class="badge badge-primary">Description : </span> {{description}}</h4>
+                            {% endif %}
+                        </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
